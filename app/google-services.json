@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "565081353255",
+    "firebase_url": "https://fala-ai-app-bc8ff.firebaseio.com",
+    "project_id": "fala-ai-app-bc8ff",
+    "storage_bucket": "fala-ai-app-bc8ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565081353255:android:68ca82cb85aa45cd",
+        "android_client_info": {
+          "package_name": "falaai.app.com.falaai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565081353255-ele6t07u6v48t5575ckcb7uginj05o1e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "falaai.app.com.falaai",
+            "certificate_hash": "832dd6f3810a4b0cc83832ba7bcc456019ae825a"
+          }
+        },
+        {
+          "client_id": "565081353255-kvlgr526vvpa8se5poca78a9ddou96md.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "565081353255-kvlgr526vvpa8se5poca78a9ddou96md.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjviIyxQwlMT7kKWWsWDAKxbVOfyXE29Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565081353255-kvlgr526vvpa8se5poca78a9ddou96md.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
