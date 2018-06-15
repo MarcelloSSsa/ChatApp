@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -60,11 +61,17 @@ public class CadastroUsuario extends AppCompatActivity {
                 .addOnCompleteListener(CadastroUsuario.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) //TRUE, Sucesso ao criar o usuário
+                if (task.isSuccessful()) { //TRUE, Sucesso ao criar o usuário
+
+                    usuario.setId(task.getResult().getUser().getUid().toString());
+                    usuario.salvar();
+                    finish();
                     Toast.makeText(CadastroUsuario.this, "Usuário cadastrado com sucesso.", Toast.LENGTH_SHORT).show();
-                
-                else
+                }
+
+                else {
                     Toast.makeText(CadastroUsuario.this, "Erro ao cadastrar", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
