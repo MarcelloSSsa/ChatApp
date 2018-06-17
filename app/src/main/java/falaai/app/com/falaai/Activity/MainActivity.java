@@ -3,6 +3,7 @@ package falaai.app.com.falaai.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,8 +13,8 @@ import falaai.app.com.falaai.R;
 
 public class MainActivity extends Activity {
 
-    private Button sair;
     private FirebaseAuth mAuth;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +23,8 @@ public class MainActivity extends Activity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        sair = findViewById(R.id.botaoSair);
-
-        sair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Fala Ai");
+        //setSupportActionBar(toolbar);
     }
 }
