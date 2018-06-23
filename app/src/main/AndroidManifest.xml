@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.MainActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Activity.CadastroUsuario" />
+        <activity android:name=".Activity.CadastroUsuario" android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -7,4 +7,18 @@
     tools:context=".Activity.MainActivity">
 
     <include android:id="@+id/toolbar" layout="@layout/toolbar"/>
+
+    <falaai.app.com.falaai.helper.SlidingTabLayout
+        android:id="@+id/slideTab1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+    </falaai.app.com.falaai.helper.SlidingTabLayout>
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpViewPagina"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </android.support.v4.view.ViewPager>
 </android.support.constraint.ConstraintLayout>

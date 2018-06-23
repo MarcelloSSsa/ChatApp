@@ -1,76 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical|center_horizontal"
     android:background="@color/colorPrimary"
-    tools:actionBarNavMode="false"
+    android:orientation="vertical"
     tools:context=".Activity.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="200dp"
         android:layout_height="163dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:baselineAligned="false"
+        android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/emailId"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="26dp"
         android:ems="10"
         android:hint="Digite o seu email"
         android:inputType="textEmailAddress"
+        android:singleLine="true"
         android:textColor="@color/fontColorLogin"
-        app:layout_constraintBottom_toTopOf="@+id/senhaId"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="18sp"
+        android:typeface="normal" />
 
     <EditText
         android:id="@+id/senhaId"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Digite a sua senha"
         android:inputType="textPassword"
         android:textColor="@color/fontColorLogin"
-        app:layout_constraintBottom_toTopOf="@+id/botaoEntrar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="18sp"
+        android:typeface="normal" />
 
     <Button
         android:id="@+id/botaoEntrar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
         android:background="@color/colorPrimaryDark"
         android:text="Entrar"
-        android:textColor="@color/fontColorLogin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="148dp" />
+        android:textColor="@color/fontColorLogin" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:onClick="abrirCadastroUsuario"
         android:text="Não tem conta? Cadastre-se."
-        android:textColor="@color/fontColorLogin"
-        app:layout_constraintTop_toBottomOf="@+id/senhaId"
-        tools:layout_editor_absoluteX="187dp" />
+        android:textColor="@color/fontColorLogin" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

@@ -67,6 +67,7 @@
         android:layout_marginTop="24dp"
         android:background="@color/colorPrimaryDark"
         android:text="Cadastrar"
+        android:textColor="@color/fontColorLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
