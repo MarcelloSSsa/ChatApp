@@ -2,6 +2,8 @@ package falaai.app.com.falaai.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
@@ -11,16 +13,29 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 
 import falaai.app.com.falaai.R;
+import falaai.app.com.falaai.adapter.TabAdapter;
+import falaai.app.com.falaai.helper.SlidingTabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Toolbar toolbar;
+    private SlidingTabLayout slidingTabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        slidingTabLayout = findViewById(R.id.slideTab1);
+        viewPager = findViewById(R.id.vpViewPagina);
+        slidingTabLayout.setDistributeEvenly(true);
+
+        TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(tabAdapter);
+        slidingTabLayout.setViewPager(viewPager);
+        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(this, R.color.fontColorLogin));
 
         mAuth = FirebaseAuth.getInstance();
 
