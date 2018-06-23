@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import falaai.app.com.falaai.R;
+import falaai.app.com.falaai.helper.Base64Custom;
 import falaai.app.com.falaai.model.Usuario;
 
 public class CadastroUsuario extends AppCompatActivity {
@@ -62,8 +63,9 @@ public class CadastroUsuario extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) { //TRUE, Sucesso ao criar o usuário
+                    String identificador = Base64Custom.converterBase64(usuario.getEmail());
 
-                    usuario.setId(task.getResult().getUser().getUid().toString());
+                    usuario.setId(identificador);
                     usuario.salvar();
                     finish();
                     Toast.makeText(CadastroUsuario.this, "Usuário cadastrado com sucesso.", Toast.LENGTH_SHORT).show();

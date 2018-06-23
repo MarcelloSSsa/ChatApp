@@ -57,7 +57,7 @@ public class LoginActivity extends Activity {
                             abrirTelaPrincipal();
                         }
                         else {
-                            Toast.makeText(LoginActivity.this, "Não foi possível entrar, verifique se tem ima conta.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Não foi possível entrar, verifique se tem uma conta.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-@JsonIgnoreProperties({"id", "senha"})
+@JsonIgnoreProperties({"id","senha"})
+
 public class Usuario {
+
     private String id;
     private String nome;
     private String email;
     private String senha;
+
     private DatabaseReference mDatabase;
 
     public Usuario() {
@@ -18,7 +21,6 @@ public class Usuario {
     public void salvar(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Usuarios").child(getId()).setValue(this);
-        //mDatabase.setValue(this);
     }
 
     public String getId() {
