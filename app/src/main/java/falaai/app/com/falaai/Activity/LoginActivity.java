@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import falaai.app.com.falaai.R;
+import falaai.app.com.falaai.helper.Base64Custom;
+import falaai.app.com.falaai.helper.Preferencias;
 import falaai.app.com.falaai.model.Usuario;
 
 public class LoginActivity extends Activity {
@@ -54,6 +56,10 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+                            String identificadorUsuarioLogado = Base64Custom.converterBase64(usuario.getEmail().toString());
+                            Preferencias preferencias = new Preferencias(LoginActivity.this);
+                            preferencias.salvarDados(identificadorUsuarioLogado);
+
                             abrirTelaPrincipal();
                         }
                         else {
