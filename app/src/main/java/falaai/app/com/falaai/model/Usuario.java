@@ -1,11 +1,8 @@
 package falaai.app.com.falaai.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Usuario {
 
     private String id;
@@ -23,7 +20,6 @@ public class Usuario {
         mDatabase.child("Usuarios").child(getId()).setValue(this);
     }
 
-    @JsonIgnore
     public String getId() {
         return id;
     }
@@ -47,8 +43,7 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    @JsonIgnore
+
     public String getSenha() {
         return senha;
     }

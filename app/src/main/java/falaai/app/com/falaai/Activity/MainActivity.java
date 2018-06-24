@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                                 *       contato adicionado
                                  */
                                 mDatabase = FirebaseDatabase.getInstance().getReference()
-                                                                          .child("Usuarios")
+                                                                          .child("Contatos")
                                                                           .child(identificadorUsuarioLogado)
                                                                           .child(identificadorContato);
                                 mDatabase.setValue(contato);
