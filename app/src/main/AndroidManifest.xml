@@ -21,8 +21,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MainActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Activity.CadastroUsuario" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.CadastroUsuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.ConversaActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="falaai.app.com.falaai.Activity.MainActivity"/>
+        </activity>
+
     </application>
 
 </manifest>

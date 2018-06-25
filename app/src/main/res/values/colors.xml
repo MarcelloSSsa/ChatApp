@@ -5,4 +5,5 @@
     <color name="colorAccent">#075e54</color>
     <color name="primary_material_dark_1">#0a5048</color>
     <color name="fontColorLogin">#ffffff</color>
+    <color name="cinza">#CCCCCC</color>
 </resources>
