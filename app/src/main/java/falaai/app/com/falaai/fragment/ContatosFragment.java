@@ -46,7 +46,7 @@ public class ContatosFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         contatos = new ArrayList<Contato>();
 
@@ -90,8 +90,12 @@ public class ContatosFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ConversaActivity.class);
-                intent.putExtra("Nome", "");
-                intent.putExtra("Email", "");
+
+                Contato contato = contatos.get(position);
+
+                intent.putExtra("Nome", contato.getNome());
+                intent.putExtra("Email", contato.getEmail());
+
                 startActivity(intent);
             }
         });
