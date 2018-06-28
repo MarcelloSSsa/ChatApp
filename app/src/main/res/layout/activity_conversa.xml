@@ -27,13 +27,16 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/editMensagem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Mensagen"
+            android:hint="Mensagem"
+            android:textColor="@android:color/black"
             android:textColorHint="@android:color/black" />
 
         <ImageButton
+            android:id="@+id/botaoEnviar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_send" />
