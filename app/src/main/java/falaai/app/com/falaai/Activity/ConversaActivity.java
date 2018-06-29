@@ -1,19 +1,28 @@
 package falaai.app.com.falaai.Activity;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import falaai.app.com.falaai.R;
+import falaai.app.com.falaai.adapter.MensagemAdapter;
 import falaai.app.com.falaai.helper.Base64Custom;
 import falaai.app.com.falaai.helper.Preferencias;
 import falaai.app.com.falaai.model.Mensagem;
@@ -26,6 +35,10 @@ public class ConversaActivity extends AppCompatActivity {
     private String nomeUsuarioDestinatario;
     private EditText textoMensagem;
     private ImageButton botaoEnviar;
+    private ListView listaConversa;
+    private ArrayAdapter<Mensagem> arrayAdapter;
+    private ArrayList<Mensagem> mensagens;
+    private ValueEventListener valueEventListenerMensagem;
 
     private DatabaseReference mDatabase;
 
@@ -37,6 +50,7 @@ public class ConversaActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toobarConversas);
         textoMensagem = findViewById(R.id.editMensagem);
         botaoEnviar = findViewById(R.id.botaoEnviar);
+        listaConversa = findViewById(R.id.listViewMensagens);
 
         Preferencias preferencias = new Preferencias(ConversaActivity.this);
         idUsuarioLogado = preferencias.getIdentificador();
@@ -51,6 +65,39 @@ public class ConversaActivity extends AppCompatActivity {
         toolbar.setTitle(nomeUsuarioDestinatario);
         toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left);
         setSupportActionBar(toolbar);
+
+        mensagens = new ArrayList<>();
+
+        /*arrayAdapter = new ArrayAdapter<>(
+                ConversaActivity.this,
+                android.R.layout.simple_list_item_1,
+                mensagens
+        );*/
+
+        arrayAdapter = new MensagemAdapter(ConversaActivity.this, mensagens);
+        listaConversa.setAdapter(arrayAdapter);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference()
+                .child("Mensagens").child(idUsuarioLogado).child(idUsuarioDestinatario);
+
+        valueEventListenerMensagem = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mensagens.clear();
+
+                for (DataSnapshot dados :dataSnapshot.getChildren()){
+                    Mensagem mensagem = dados.getValue(Mensagem.class);
+                    mensagens.add(mensagem);
+                }
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        mDatabase.addValueEventListener(valueEventListenerMensagem);
 
         botaoEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
