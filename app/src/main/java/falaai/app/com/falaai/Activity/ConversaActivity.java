@@ -25,12 +25,14 @@ import falaai.app.com.falaai.R;
 import falaai.app.com.falaai.adapter.MensagemAdapter;
 import falaai.app.com.falaai.helper.Base64Custom;
 import falaai.app.com.falaai.helper.Preferencias;
+import falaai.app.com.falaai.model.Conversa;
 import falaai.app.com.falaai.model.Mensagem;
 
 public class ConversaActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private String idUsuarioLogado;
+    private String nomeUsuarioLogado;
     private String idUsuarioDestinatario;
     private String nomeUsuarioDestinatario;
     private EditText textoMensagem;
@@ -39,6 +41,7 @@ public class ConversaActivity extends AppCompatActivity {
     private ArrayAdapter<Mensagem> arrayAdapter;
     private ArrayList<Mensagem> mensagens;
     private ValueEventListener valueEventListenerMensagem;
+    private Conversa conversa;
 
     private DatabaseReference mDatabase;
 
@@ -54,6 +57,7 @@ public class ConversaActivity extends AppCompatActivity {
 
         Preferencias preferencias = new Preferencias(ConversaActivity.this);
         idUsuarioLogado = preferencias.getIdentificador();
+        nomeUsuarioLogado = preferencias.getNome();
 
         final Bundle extra = getIntent().getExtras();
 
@@ -67,12 +71,6 @@ public class ConversaActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mensagens = new ArrayList<>();
-
-        /*arrayAdapter = new ArrayAdapter<>(
-                ConversaActivity.this,
-                android.R.layout.simple_list_item_1,
-                mensagens
-        );*/
 
         arrayAdapter = new MensagemAdapter(ConversaActivity.this, mensagens);
         listaConversa.setAdapter(arrayAdapter);
@@ -112,7 +110,37 @@ public class ConversaActivity extends AppCompatActivity {
                     mensagem.setIdUsuario(idUsuarioLogado);
                     mensagem.setMensagem(mensagemDigitada);
 
-                    salvaMensagemFirebase(idUsuarioLogado, idUsuarioDestinatario, mensagem);
+                    //Salva msgm para o remetente
+                    Boolean retornoRemetente = salvaMensagemFirebase(idUsuarioLogado, idUsuarioDestinatario, mensagem);
+                    if (!retornoRemetente){
+                        Toast.makeText(
+                                ConversaActivity.this,
+                                "Não foi possível enviar a mensagen",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    //Salva msgm para o destinatário
+                    Boolean retornoDestinatario = salvaMensagemFirebase(idUsuarioDestinatario, idUsuarioLogado, mensagem);
+                    if (!retornoDestinatario){
+                        Toast.makeText(
+                                ConversaActivity.this,
+                                "Não foi possível enviar a mensagen",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    conversa = new Conversa();
+                    conversa.setIdUsuario(idUsuarioLogado);
+                    conversa.setNome(nomeUsuarioLogado);
+                    conversa.setMensagem(mensagemDigitada);
+
+                    salvaConversasFirebase(idUsuarioLogado, idUsuarioDestinatario, conversa);
+
+                    conversa = new Conversa();
+                    conversa.setIdUsuario(idUsuarioDestinatario);
+                    conversa.setNome(nomeUsuarioDestinatario);
+                    conversa.setMensagem(mensagemDigitada);
+
+                    salvaConversasFirebase(idUsuarioDestinatario, idUsuarioLogado, conversa);
 
                     textoMensagem.setText("");
                 }
@@ -133,6 +161,32 @@ public class ConversaActivity extends AppCompatActivity {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private boolean salvaConversasFirebase(String idRemetente, String idDestinatario, Conversa conversa) {
+        try{
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("Conversas").child(idRemetente)
+                    .child(idDestinatario)
+                    .setValue(conversa);
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mDatabase.addValueEventListener(valueEventListenerMensagem);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mDatabase.removeEventListener(valueEventListenerMensagem);
     }
 
     @Override
