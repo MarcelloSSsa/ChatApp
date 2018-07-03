@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import falaai.app.com.falaai.Activity.ConversaActivity;
+import falaai.app.com.falaai.Activity.LoginActivity;
 import falaai.app.com.falaai.Activity.MainActivity;
 import falaai.app.com.falaai.R;
 import falaai.app.com.falaai.adapter.ContatoAdapter;
@@ -48,16 +49,11 @@ public class ContatosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        contatos = new ArrayList<Contato>();
+        contatos = new ArrayList<>();
 
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_contatos, container, false);
         listView = view.findViewById(R.id.listViewContatos);
-/*        adapter = new ArrayAdapter(
-                getActivity(),
-                R.layout.lista_contatos,
-                contatos
-        );*/
 
         adapter = new ContatoAdapter(getActivity(), contatos);
 

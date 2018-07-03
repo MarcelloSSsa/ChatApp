@@ -115,7 +115,7 @@ public class ConversaActivity extends AppCompatActivity {
                     if (!retornoRemetente){
                         Toast.makeText(
                                 ConversaActivity.this,
-                                "Não foi possível enviar a mensagen",
+                                "Não foi possível enviar a mensagem",
                                 Toast.LENGTH_SHORT).show();
                     }
 
@@ -124,7 +124,21 @@ public class ConversaActivity extends AppCompatActivity {
                     if (!retornoDestinatario){
                         Toast.makeText(
                                 ConversaActivity.this,
-                                "Não foi possível enviar a mensagen",
+                                "Não foi possível enviar a mensagem",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    conversa = new Conversa();
+                    conversa.setIdUsuario(idUsuarioDestinatario);
+                    conversa.setNome(nomeUsuarioDestinatario);
+                    conversa.setMensagem(mensagemDigitada);
+
+                    Boolean retSalvaConversaRemetente = salvaConversasFirebase(idUsuarioLogado, idUsuarioDestinatario, conversa);
+
+                    if (!retSalvaConversaRemetente){
+                        Toast.makeText(
+                                ConversaActivity.this,
+                                "Não foi possível Salvar a mensagem",
                                 Toast.LENGTH_SHORT).show();
                     }
 
@@ -133,14 +147,14 @@ public class ConversaActivity extends AppCompatActivity {
                     conversa.setNome(nomeUsuarioLogado);
                     conversa.setMensagem(mensagemDigitada);
 
-                    salvaConversasFirebase(idUsuarioLogado, idUsuarioDestinatario, conversa);
+                    Boolean retSalvaConversaDestinatario = salvaConversasFirebase(idUsuarioDestinatario, idUsuarioLogado, conversa);
 
-                    conversa = new Conversa();
-                    conversa.setIdUsuario(idUsuarioDestinatario);
-                    conversa.setNome(nomeUsuarioDestinatario);
-                    conversa.setMensagem(mensagemDigitada);
-
-                    salvaConversasFirebase(idUsuarioDestinatario, idUsuarioLogado, conversa);
+                    if (!retSalvaConversaDestinatario){
+                        Toast.makeText(
+                                ConversaActivity.this,
+                                "Não foi possível Salvar a mensagem",
+                                Toast.LENGTH_SHORT).show();
+                    }
 
                     textoMensagem.setText("");
                 }
